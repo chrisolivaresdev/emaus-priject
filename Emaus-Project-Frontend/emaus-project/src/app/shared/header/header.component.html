@@ -1,0 +1,71 @@
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+          <nav class="navbar top-navbar navbar-expand-md navbar-light">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div class="navbar-header">
+                  <a class="navbar-brand pointer" (click)="dashboard()">
+                      <!-- Logo icon --><b>
+                          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                          <!-- Dark Logo icon -->
+                          <img src="assets/images/favicon.png" alt="homepage" style="width:35px; height: 35px; border-radius: 50%;" class="dark-logo" />
+
+                      </b>
+                      <!--End Logo icon -->
+                      <!-- Logo text -->
+                      <span class="emaus">
+                       <!-- dark Logo text -->
+                        Emaús
+
+                      </span>
+                  </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <div class="navbar-collapse">
+                  <!-- ============================================================== -->
+                  <!-- toggle and nav items -->
+                  <!-- ============================================================== -->
+                  <ul class="navbar-nav mr-auto">
+                    <!-- This is  -->
+                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    <li class="nav-item hidden-sm-down"></li>
+                </ul>
+                  <!-- ============================================================== -->
+                  <!-- User profile and search -->
+                  <!-- ============================================================== -->
+                  <ul class="navbar-nav my-lg-0">
+
+                      <!-- ============================================================== -->
+                      <!-- Profile -->
+                      <!-- ============================================================== -->
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/favicon.png" alt="user" style="width:35px; height: 35px; border-radius: 50%;" class="profile-pic" /></a>
+                          <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                              <ul class="dropdown-user">
+                                  <li>
+                                      <div class="dw-user-box">
+                                          <div class="u-img"><img src="assets/images/favicon.png"  alt="user"></div>
+                                          <div class="u-text">
+                                              <h4>Christopher</h4>
+                                              <h4>Chris@gmail.com</h4>
+                                            </div>
+                                      </div>
+                                  </li>
+                                  <li role="separator" class="divider"></li>
+                                  <li ><a  class="pointer" (click)="logout()"><i class="fa fa-power-off" ></i> Cerrar sesión</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+      </header>
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->

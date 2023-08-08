@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Skranji:wght@700&display=swap');
+
+.emaus{
+font-family: 'Skranji', cursive;
+margin-left: 50px;
+font-size: 20px;
+}
+
+header.topbar{
+  background: #9ccdff;
+}
+
+i.ti-menu, i.ti-close{
+  color: black;
+}
+
+.dropdown-menu.dropdown-menu-right.animated.flipInY.show {
+  background: #9ccdff;
+}
+
+a {
+  color: black !important;
+}
+
+a:hover{
+  background:transparent !important;
+  color:white !important;
+}
+
+.pointer {
+  cursor: pointer;
+}

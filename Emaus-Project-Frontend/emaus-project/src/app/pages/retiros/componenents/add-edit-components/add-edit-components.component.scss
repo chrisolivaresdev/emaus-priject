@@ -1,0 +1,17 @@
+.submit {
+  background-color:#9ccdff;
+  border-color: #9ccdff;
+}
+
+.cancel{
+  background-color:#64748B;
+  border-color: #64748B;
+}
+
+@media (max-width: 1023px){
+  .d-flex {
+       display: flex !important;
+  }
+}
+
+

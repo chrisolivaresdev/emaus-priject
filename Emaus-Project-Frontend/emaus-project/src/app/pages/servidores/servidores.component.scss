@@ -1,0 +1,22 @@
+.acciones{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon-color{
+  color: #9ccdff;
+  cursor: pointer;
+}
+
+.icon-color:hover{
+  color: #64748B;
+}
+
+.container-buttons{
+  display: flex !important;
+  justify-content:space-around !important;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  row-gap:10px !important;
+}

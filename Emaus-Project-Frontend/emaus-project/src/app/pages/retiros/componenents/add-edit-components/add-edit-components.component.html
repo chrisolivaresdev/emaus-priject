@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">{{edit ? 'Editar retiro' :'Agregar un nuevo retiro'}}</h4>
+              <form class="form p-t-20" [formGroup]="formGroup">
+                  <div class="form-group">
+                      <label for="exampleInputuname">Nombre del retiro</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="ti-user"></i></div>
+                          <input type="text" class="form-control" formControlName="nombre">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Casa de retiro</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="ti-home"></i></div>
+                          <input type="text" class="form-control" formControlName="casa_ret">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="pwd1">Fecha de inicio</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="ti-calendar"></i></div>
+                          <input type="date" class="form-control" formControlName="fecha_ini">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="pwd2">Fecha de culminación</label>
+                      <div class="input-group">
+                          <div class="input-group-addon"><i class="ti-calendar"></i></div>
+                          <input type="date" class="form-control" formControlName="fecha_cul">
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center" >
+                    <button  class="btn btn-inverse waves-effect waves-light m-r-10" (click)="regresar()">Regresar</button>
+                    <button  class="btn btn-success waves-effect waves-light  submit" (click)="save()">Guardar</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
