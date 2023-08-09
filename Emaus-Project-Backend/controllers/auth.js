@@ -37,7 +37,9 @@ const login = async (req, resp = response) =>{
 
         resp.json({
             ok:true,
-            token
+            token,
+            email: usuarioDB.email,
+            nombre: usuarioDB.nombre
         })
 
     

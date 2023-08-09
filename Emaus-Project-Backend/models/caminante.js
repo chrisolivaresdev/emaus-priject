@@ -11,6 +11,9 @@ const CaminanteSchema = Schema({
         required:true,
         unique:true
     },
+    img:{
+        type:String,
+    },
     fecha_nac:{
         type:String,
         required:true

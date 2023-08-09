@@ -10,6 +10,9 @@ const ServidorSchema = Schema({
         type:String,
         required:true
     },
+    img:{
+        type:String,
+    },
     fecha_nac:{
         type:String,
         required:true
