@@ -58,7 +58,6 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
 
   getData(id :any){
     this.servidoresService.getByIdRetiro(id ).subscribe(resp => {
-      console.log(resp)
       this.servidores= resp.servidor
     })
   }
@@ -69,7 +68,8 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
   }
 
   eliminar(){
-    this.servidoresService.delete(this.servidorelected.uid).subscribe(resp => {
+    console.log(this.servidorelected)
+    this.servidoresService.delete(this.servidorelected._id).subscribe(resp => {
       Swal.fire(
         'Bien!',
         'Se ha eliminado correctamente el servidor!!',

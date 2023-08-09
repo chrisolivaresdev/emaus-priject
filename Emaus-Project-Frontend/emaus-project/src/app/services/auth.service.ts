@@ -15,11 +15,16 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   baseUrl = environment.baseUrl
+  userActive:any
 
   constructor(private http: HttpClient, private route:Router) { }
 
   get token(): string{
     return localStorage.getItem('token') || '';
+  }
+
+  get user():string{
+    return this.userActive
   }
 
   validarToken():Observable<boolean>{
@@ -31,6 +36,10 @@ export class AuthService {
     }).pipe(
       tap( (resp: any) => {
         localStorage.setItem('token', resp.token)
+        this.userActive = {
+          email: resp.email,
+          nombre: resp.nombre
+        }
       }),
       catchError( error =>  of(false) )
     )
@@ -46,6 +55,10 @@ export class AuthService {
    .pipe(
     tap( (resp:any) => {
       localStorage.setItem('token', resp.token)
+      this.userActive = {
+        email: resp.email,
+        nombre: resp.nombre
+      }
     }),
     map( resp => true)
    )
