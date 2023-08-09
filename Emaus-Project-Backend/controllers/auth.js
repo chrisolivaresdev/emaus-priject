@@ -55,13 +55,16 @@ const login = async (req, resp = response) =>{
 const validarJswToken = async(req, res = response ) => {
 
     const { uid} = req;
-
+    const usuarioDB = await Usuario.findById(uid)
+    console.log(usuarioDB)
     // Generar el JWT
     const token = await generarJWT( uid);
 
     return res.json({
         ok: true,
         token,
+        email:usuarioDB.email,
+        nombre:usuarioDB.nombre
     });
 
 }
