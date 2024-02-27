@@ -15,7 +15,7 @@ const getUsuarios = async(req, resp)=>{
 }
 
 const newUsuario = async (req, resp = response)=>{
-    const {email, password, nombre} = req.body
+    const {email, password, name} = req.body
     
 
 
@@ -65,7 +65,7 @@ const newUsuario = async (req, resp = response)=>{
 const actualizarUsuarios = async( req, resp) => {
         
     const uid = req.params.id
-    const {nombre, role, email} = req.body
+    const {name, role, email} = req.body
 
     try {
     const usuarioDB = await Usuario.findById(uid)

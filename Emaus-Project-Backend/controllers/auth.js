@@ -35,11 +35,13 @@ const login = async (req, resp = response) =>{
 
         const token = await generarJWT(usuarioDB._id)
 
+
         resp.json({
             ok:true,
             token,
             email: usuarioDB.email,
-            nombre: usuarioDB.nombre
+            name: usuarioDB.name,
+            role: usuarioDB.role
         })
 
     
@@ -63,8 +65,9 @@ const validarJswToken = async(req, res = response ) => {
     return res.json({
         ok: true,
         token,
-        email:usuarioDB.email,
-        nombre:usuarioDB.nombre
+        email: usuarioDB.email,
+        name: usuarioDB.name,
+        role: usuarioDB.role
     });
 
 }
