@@ -15,7 +15,6 @@
       <td class="text-center" *ngFor="let col of cols">
         {{retiro[col.field]}}
         <span class="acciones" *ngIf="col.field == 'Acciones'">
-          <!-- <i pTooltip="Ver" tooltipPosition="bottom" class="mdi mdi-eye icon-color" style="font-size: 1.2rem"></i> -->
           <i pTooltip="Editar" tooltipPosition="bottom" class="mdi mdi-account-edit icon-color" style="font-size: 1.2rem" (click)="editar(retiro)"></i>
           <i pTooltip="Ver caminantes" tooltipPosition="bottom" class="mdi mdi-human icon-color" style="font-size: 1.2rem" (click)="verCaminantes(retiro)"></i>
           <i pTooltip="Ver servidores" tooltipPosition="bottom" class="mdi mdi-human-greeting icon-color" style="font-size: 1.2rem" (click)="verServidor(retiro)"></i>

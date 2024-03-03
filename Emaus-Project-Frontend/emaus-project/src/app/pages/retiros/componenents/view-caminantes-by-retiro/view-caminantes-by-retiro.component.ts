@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CaminantesService } from 'src/app/services/caminantes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { User } from 'src/app/interface/user.interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-view-caminantes-by-retiro',
@@ -41,10 +43,12 @@ detailStruct= [
   {label:'Aporte economico', field: 'aporte_eco'},
   {label:'Notas', field: 'notas'},
 ]
-  constructor( private caminantesService:CaminantesService,private router:Router, private activateRoute:ActivatedRoute) { }
+userActive!:User
+
+  constructor( private caminantesService:CaminantesService,private router:Router, private activateRoute:ActivatedRoute, private authService:AuthService) { }
 
   ngOnInit(): void {
-
+    this.userActive = this.authService.userActive
     this.activateRoute.params.subscribe({
       next: ({ id }) => {
         this.idRetiro = id
@@ -54,10 +58,39 @@ detailStruct= [
 }
 
   getData(id :any){
-    this.caminantesService.getByIdRetiro(id ).subscribe(resp => {
-      console.log(resp)
-      this.caminantes= resp.caminante
-    })
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.caminantesService.getByIdRetiro(id).subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SAMUEL':
+        this.caminantesService.getByIdRetiroSamuel(id).subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SERAFIN':
+        this.caminantesService.getByIdRetiroSerafin(id).subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.caminantesService.getByIdRetiroSemillita(id).subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   show(caminante:any){
@@ -66,18 +99,71 @@ detailStruct= [
   }
 
   eliminar(){
-    this.caminantesService.delete(this.caminanteSelected.uid).subscribe(resp => {
-      Swal.fire(
-        'Bien!',
-        'Se ha eliminado correctamente el caminante!!',
-        'success'
-      )
-      this.ngOnInit()
-      this.visible = false;
-    },(err)=> {
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.caminantesService.delete(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
 
-     return Swal.fire('Error', err.error.msg, 'warning')
-    })
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SAMUEL':
+        this.caminantesService.deleteSamuel(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SERAFIN':
+        this.caminantesService.deleteSerafin(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.caminantesService.deleteSemillita(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   add(){

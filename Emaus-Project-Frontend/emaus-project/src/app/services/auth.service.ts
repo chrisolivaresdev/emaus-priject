@@ -5,6 +5,7 @@ import { login } from '../interface/login.interface';
 import {catchError, map, tap} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../interface/user.interface';
 
 
 
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   baseUrl = environment.baseUrl
-  userActive:any
+  userActive!: User
 
   constructor(private http: HttpClient, private route:Router) { }
 
@@ -23,7 +24,7 @@ export class AuthService {
     return localStorage.getItem('token') || '';
   }
 
-  get user():string{
+  get user():User{
     return this.userActive
   }
 
@@ -38,7 +39,8 @@ export class AuthService {
         localStorage.setItem('token', resp.token)
         this.userActive = {
           email: resp.email,
-          nombre: resp.nombre
+          name: resp.name,
+          role:resp.role
         }
       }),
       catchError( error =>  of(false) )
@@ -57,7 +59,8 @@ export class AuthService {
       localStorage.setItem('token', resp.token)
       this.userActive = {
         email: resp.email,
-        nombre: resp.nombre
+        name: resp.name,
+        role: resp.role
       }
     }),
     map( resp => true)

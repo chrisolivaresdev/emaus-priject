@@ -3,7 +3,25 @@
            <div class="card-header">
                <h4 class="m-b-0 text-white">Retiros.</h4></div>
            <div class="card-body">
-               <h3 class="card-title">Lucas 24 13-35.</h3>
+            <ng-container [ngSwitch]="userActive.role">
+              <ng-container *ngSwitchCase="'EMAUS'">
+                <h3 class="card-title">Lucas 24 13-35.</h3>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'SAMUEL'">
+                <h3 class="card-title">Samuel 1-3, 1-10.</h3>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'SERAFIN'">
+                <h3 class="card-title">Josué 24:15.</h3>
+              </ng-container>
+
+
+              <ng-container *ngSwitchCase="'SEMILLITA'">
+                <h3 class="card-title">Josué 18:3.</h3>
+              </ng-container>
+
+            </ng-container>
                <p class="card-text">Retiro espiritual cuyo objetivo es conocer el amor de Jesús.</p>
                <a  (click)="Router('R')"  style="color: black;" class="btn btn-primary">Ver retiros.</a>
            </div>

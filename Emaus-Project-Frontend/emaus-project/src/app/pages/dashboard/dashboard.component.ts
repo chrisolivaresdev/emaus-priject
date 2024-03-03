@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interface/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,26 +10,30 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   customers:any
-  constructor(private router:Router) { }
+  userActive!:User
+  constructor(private router:Router, private authService:AuthService) { }
+
 
   ngOnInit(): void {
-
-
+    this.userActive = this.authService.userActive
   }
 
   Router(url:string){
-
-    if(url == "R"){
+    switch (url) {
+      case 'R':
       this.router.navigateByUrl('/retiros')
-    }
+        break;
 
-    if(url == "S"){
-      this.router.navigateByUrl('/servidores')
-    }
+      case 'S':
+        this.router.navigateByUrl('/servidores')
+          break;
 
-    if(url == "C"){
-      this.router.navigateByUrl('/caminantes')
+      case 'C':
+        this.router.navigateByUrl('/caminantes')
+          break;
+
+      default:
+        break;
     }
   }
-
 }

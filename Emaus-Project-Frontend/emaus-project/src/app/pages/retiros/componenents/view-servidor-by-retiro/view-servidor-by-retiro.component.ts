@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServidoresService } from '../../../../services/servidores.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/interface/user.interface';
 
 @Component({
   selector: 'app-view-servidor-by-retiro',
@@ -43,11 +45,12 @@ detailStruct= [
   {label:'Aporte economico', field: 'aporte_eco'},
   {label:'Notas', field: 'notas'},
 ]
+userActive!:User
 
-constructor( private servidoresService:ServidoresService,private router:Router, private activateRoute:ActivatedRoute) { }
+constructor( private servidoresService:ServidoresService,private router:Router, private activateRoute:ActivatedRoute, private authService:AuthService) { }
 
   ngOnInit(): void {
-
+    this.userActive = this.authService.userActive
     this.activateRoute.params.subscribe({
       next: ({ id }) => {
         this.idRetiro = id
@@ -57,9 +60,34 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
 }
 
   getData(id :any){
-    this.servidoresService.getByIdRetiro(id ).subscribe(resp => {
-      this.servidores= resp.servidor
-    })
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.servidoresService.getByIdRetiro(id).subscribe(resp => {
+          this.servidores= resp.servidor
+        })
+        break;
+      case 'SAMUEL':
+        this.servidoresService.getByIdRetiroSamuel(id).subscribe(resp => {
+          this.servidores= resp.servidor
+        })
+        break;
+
+      case 'SERAFIN':
+        this.servidoresService.getByIdRetiroSerafin(id).subscribe(resp => {
+          this.servidores= resp.servidor
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.servidoresService.getByIdRetiroSemillita(id).subscribe(resp => {
+          this.servidores= resp.servidor
+        })
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   show(servidor:any){
@@ -68,19 +96,67 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
   }
 
   eliminar(){
-    console.log(this.servidorelected)
-    this.servidoresService.delete(this.servidorelected._id).subscribe(resp => {
-      Swal.fire(
-        'Bien!',
-        'Se ha eliminado correctamente el servidor!!',
-        'success'
-      )
-      this.ngOnInit()
-      this.visible = false;
-    },(err)=> {
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.servidoresService.delete(this.servidorelected._id).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el servidor!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
 
-     return Swal.fire('Error', err.error.msg, 'warning')
-    })
+      case 'SAMUEL':
+        this.servidoresService.deleteSamuel(this.servidorelected._id).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el servidor!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SERAFIN':
+        this.servidoresService.deleteSerafin(this.servidorelected._id).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el servidor!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.servidoresService.deleteSemillita(this.servidorelected._id).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el servidor!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   add(){

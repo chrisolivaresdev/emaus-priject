@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interface/user.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { CaminantesService } from 'src/app/services/caminantes.service';
 import Swal from 'sweetalert2';
 
@@ -42,14 +44,48 @@ detailStruct= [
   {label:'Aporte economico', field: 'aporte_eco'},
   {label:'Notas', field: 'notas'},
 ]
-  constructor( private caminantesService:CaminantesService, private router:Router) { }
+userActive!:User
+
+  constructor( private caminantesService:CaminantesService, private router:Router, private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.userActive = this.authService.userActive
+    this.getData()
+  }
 
-    this.caminantesService.get().subscribe(resp => {
-      console.log(resp)
-      this.caminantes= resp.caminante
-    })
+  getData(){
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.caminantesService.get().subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SAMUEL':
+        this.caminantesService.getSamuel().subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SERAFIN':
+        this.caminantesService.getSerafin().subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.caminantesService.getSemillita().subscribe(resp => {
+          console.log(resp)
+          this.caminantes= resp.caminante
+        })
+        break;
+
+      default:
+        break;
+    }
   }
 
   show(caminante:any){
@@ -58,18 +94,71 @@ detailStruct= [
   }
 
   eliminar(){
-    this.caminantesService.delete(this.caminanteSelected.uid).subscribe(resp => {
-      Swal.fire(
-        'Bien!',
-        'Se ha eliminado correctamente el caminante!!',
-        'success'
-      )
-      this.ngOnInit()
-      this.visible = false;
-    },(err)=> {
+    switch (this.userActive.role) {
+      case 'EMAUS':
+        this.caminantesService.delete(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
 
-     return Swal.fire('Error', err.error.msg, 'warning')
-    })
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SAMUEL':
+        this.caminantesService.deleteSamuel(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SERAFIN':
+        this.caminantesService.deleteSerafin(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      case 'SEMILLITA':
+        this.caminantesService.deleteSemillita(this.caminanteSelected.uid).subscribe(resp => {
+          Swal.fire(
+            'Bien!',
+            'Se ha eliminado correctamente el caminante!!',
+            'success'
+          )
+          this.ngOnInit()
+          this.visible = false;
+        },(err)=> {
+
+         return Swal.fire('Error', err.error.msg, 'warning')
+        })
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   ver(caminante :any){
