@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interface/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { CaminantesService } from 'src/app/services/caminantes.service';
-import { RetiroService } from 'src/app/services/retiro.service';
+import { ImageService } from 'src/app/services/image.service';
 
 
 import Swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class AddEditCaminanteComponent implements OnInit {
   idCaminante: any
   userActive!:User
 
-  constructor(private router: Router, private caminantesService:CaminantesService, private ActivateRoute: ActivatedRoute, private fb:FormBuilder, private authService:AuthService) {
+  constructor(private router: Router, private caminantesService:CaminantesService, private ActivateRoute: ActivatedRoute, private fb:FormBuilder, private authService:AuthService, private imageService:ImageService) {
     this.formGroup = this.fb.group(
       {
         nombre: ['', [Validators.required]],
@@ -40,6 +40,7 @@ export class AddEditCaminanteComponent implements OnInit {
         alergia: ['', [Validators.required]],
         aporte_eco: ['', [Validators.required]],
         notas: ['', [Validators.required]],
+        img:['']
       }
       )
    }
@@ -85,6 +86,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
         break;
@@ -108,6 +110,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
         break;
@@ -131,6 +134,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
         break;
@@ -154,6 +158,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
         break;
@@ -179,6 +184,7 @@ export class AddEditCaminanteComponent implements OnInit {
         this.formGroup.controls['alergia'].setValue(caminante.alergia);
         this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
         this.formGroup.controls['notas'].setValue(caminante.notas);
+        this.formGroup.controls['img'].setValue(caminante.img);
       }
     })
   }
@@ -698,6 +704,14 @@ export class AddEditCaminanteComponent implements OnInit {
       }
 
     }
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.imageService.toBase64(file).then((base64) => {
+
+      this.formGroup.controls['img'].setValue(base64);
+    });
   }
 
 }

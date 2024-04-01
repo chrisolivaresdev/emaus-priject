@@ -61,28 +61,24 @@ userActive!:User
     switch (this.userActive.role) {
       case 'EMAUS':
         this.caminantesService.getByIdRetiro(id).subscribe(resp => {
-          console.log(resp)
           this.caminantes= resp.caminante
         })
         break;
 
       case 'SAMUEL':
         this.caminantesService.getByIdRetiroSamuel(id).subscribe(resp => {
-          console.log(resp)
           this.caminantes= resp.caminante
         })
         break;
 
       case 'SERAFIN':
         this.caminantesService.getByIdRetiroSerafin(id).subscribe(resp => {
-          console.log(resp)
           this.caminantes= resp.caminante
         })
         break;
 
       case 'SEMILLITA':
         this.caminantesService.getByIdRetiroSemillita(id).subscribe(resp => {
-          console.log(resp)
           this.caminantes= resp.caminante
         })
         break;

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interface/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
 import { ServidoresService } from 'src/app/services/servidores.service';
 
 import Swal from 'sweetalert2';
@@ -20,7 +21,7 @@ export class AddEditServidorComponent implements OnInit {
   idServidor: any
   userActive!:User
 
-  constructor(private router: Router, private servidoresService:ServidoresService, private ActivateRoute: ActivatedRoute, private fb:FormBuilder, private authService:AuthService) {
+  constructor(private router: Router, private servidoresService:ServidoresService, private ActivateRoute: ActivatedRoute, private fb:FormBuilder, private authService:AuthService, private imageService:ImageService) {
     this.formGroup = this.fb.group(
       {
         nombre: ['', [Validators.required]],
@@ -38,6 +39,7 @@ export class AddEditServidorComponent implements OnInit {
         alergia: ['', [Validators.required]],
         aporte_eco: ['', [Validators.required]],
         notas: ['', [Validators.required]],
+        img:['']
       }
       )
    }
@@ -83,6 +85,7 @@ export class AddEditServidorComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(servidor.alergia);
             this.formGroup.controls['aporte_eco'].setValue(servidor.aporte_eco);
             this.formGroup.controls['notas'].setValue(servidor.notas);
+            this.formGroup.controls['img'].setValue(servidor.img);
           }
         })
         break;
@@ -106,6 +109,7 @@ export class AddEditServidorComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(servidor.alergia);
             this.formGroup.controls['aporte_eco'].setValue(servidor.aporte_eco);
             this.formGroup.controls['notas'].setValue(servidor.notas);
+            this.formGroup.controls['img'].setValue(servidor.img);
           }
         })
         break;
@@ -129,6 +133,7 @@ export class AddEditServidorComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(servidor.alergia);
             this.formGroup.controls['aporte_eco'].setValue(servidor.aporte_eco);
             this.formGroup.controls['notas'].setValue(servidor.notas);
+            this.formGroup.controls['img'].setValue(servidor.img);
           }
         })
         break;
@@ -152,6 +157,7 @@ export class AddEditServidorComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(servidor.alergia);
             this.formGroup.controls['aporte_eco'].setValue(servidor.aporte_eco);
             this.formGroup.controls['notas'].setValue(servidor.notas);
+            this.formGroup.controls['img'].setValue(servidor.img);
           }
         })
         break;
@@ -675,6 +681,14 @@ export class AddEditServidorComponent implements OnInit {
       }
 
     }
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.imageService.toBase64(file).then((base64) => {
+
+      this.formGroup.controls['img'].setValue(base64);
+    });
   }
 
 }

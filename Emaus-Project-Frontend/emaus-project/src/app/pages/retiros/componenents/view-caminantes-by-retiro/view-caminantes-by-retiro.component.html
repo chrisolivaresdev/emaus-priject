@@ -69,6 +69,9 @@
                     <div class="row">
                         <div class="card">
                             <div class="card-body">
+                              <div>
+                                <img [src]="caminanteView['img']" width="250" height="250" class="img"/>
+                              </div>
                                 <div class="lg:m-4 m-1" *ngFor="let key of detailStruct">
                                     <div [ngStyle]="{'display': 'flex', 'overflow-wrap': 'break-word', 'border-bottom':'1px solid #fafafa'}">
                                         <div class="label-detail">
@@ -84,7 +87,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                                <div  [ngStyle]="{'text-align':'center'}">
+                                                <div [ngStyle]="{'text-align':'center'}" >
                                                     <span class="detail-description">
                                                         {{caminanteView[key.field]}}
                                                     </span>

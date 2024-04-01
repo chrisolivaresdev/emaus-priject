@@ -130,13 +130,27 @@
               <div class="row">
                 <div class="form-group col-12">
                   <label >Notas</label>
-                  <div class="input-group">
-                      <div class="input-group-addon"><i class="ti-book"></i></div>
-                      <input type="text" class="form-control" formControlName="notas">
-                  </div>
-              </div>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-book"></i></div>
+                        <input type="text" class="form-control" formControlName="notas">
+                    </div>
+                </div>
               </div>
 
+              <div class="row">
+                <div class="form-group col-12">
+                  <label>Imagen
+                  </label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-gallery"></i></div>
+                        <input type="file" (change)="onFileChange($event)" class="form-control">
+                    </div>
+                </div>
+              </div>
+
+              <div *ngIf="this.formGroup.controls['img'].value?.length > 0" class="containerImg">
+                <img [src]="this.formGroup.controls['img'].value" width="250" height="250" class="img" >
+              </div>
 
                   <div class="d-flex justify-content-center" >
                     <button class="btn btn-success waves-effect waves-light submit m-r-10" (click)="save()">Guardar</button>
