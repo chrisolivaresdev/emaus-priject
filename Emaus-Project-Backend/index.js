@@ -9,6 +9,9 @@ const app = express();
 //Configurar CORS
 app.use(cors())
 
+//Configurar peso de peticiones
+app.use(express.json({ limit: '6mb' }));
+
 //lectura y parseo del body
 app.use(express.json())
 
