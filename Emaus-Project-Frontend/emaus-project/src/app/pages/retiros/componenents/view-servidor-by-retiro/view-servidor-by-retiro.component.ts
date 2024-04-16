@@ -4,7 +4,10 @@ import { ServidoresService } from '../../../../services/servidores.service';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interface/user.interface';
+import jsPDF from 'jspdf';
 
+// no se esta usando
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-view-servidor-by-retiro',
   templateUrl: './view-servidor-by-retiro.component.html',
@@ -172,10 +175,57 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
     this.servidorView = undefined
   }
 
-  ver(caminante :any){
-    this.servidorView = caminante
+  ver(servidor :any){
+    this.servidorView = servidor
     this.displayModal = true
   }
 
+  async generatePDF(servidor:any) {
+    const doc = new jsPDF();
+
+    doc.addImage(`${servidor.img}`, 'PNG', 10, 10, 40, 40);
+    doc.setTextColor(60, 60, 60)
+    doc.setFontSize(18);
+    doc.setFont('helvetica','bold')
+    doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 65, 20);
+    doc.text(`servidor ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 98, 27);
+    doc.setFontSize(16);
+    doc.text(`Nombres:`, 10, 60);
+    doc.text(`${servidor.nombre}`,80, 60);
+    doc.text(`Cedula:`, 10, 75);
+    doc.text(`${servidor.cedula}`,80, 75);
+    doc.text(`Fecha de nacimiento:`, 10, 90);
+    doc.text(`${servidor.fecha_nac}`,80, 90);
+    doc.text(`Estado civil:`, 10, 105);
+    doc.text(`${servidor.estado_civ}`,80, 105);
+    doc.text(`Dirección:`, 10, 120);
+    doc.text(`${servidor.direccion}`,80, 120);
+    doc.text(`Teléfono:`, 10, 135);
+    doc.text(`${servidor.telefono}`,80, 135);
+    doc.text(`Estatura:`, 10, 150);
+    doc.text(`${servidor.estatura}`,80, 150);
+    doc.text(`Peso:`, 10, 165);
+    doc.text(`${servidor.peso}`,80, 165);
+    doc.text(`Telefono:`, 10, 180);
+    doc.text(`${servidor.telefono}`,80, 180);
+    doc.text(`Postulante:`, 10, 195);
+    doc.text(`Juan Perez`,80, 195);
+    doc.text(`Nombre de un familiar:`, 10, 210);
+    doc.text(`${servidor.nombre_fam}`,80, 210);
+    doc.text(`Teléfono del familiar:`, 10, 225);
+    doc.text(`${servidor.telefono_fam}`,80, 225);
+    doc.text(`Antecedentes médicos:`, 10, 240);
+    doc.text(`${servidor.antecedentes_med}`,80, 240);
+    doc.text(`Tratamiento médico:`, 10, 255);
+    doc.text(`${servidor.tratamiento}`,80, 255);
+    doc.text(`Alergías:`, 10, 270);
+    doc.text(`${servidor.alergia}`,80, 270);
+    doc.text(`Notas:`, 10, 285);
+    doc.text(`${servidor.notas}`,80, 285);
+
+    doc.autoPrint({variant: 'non-conform'});
+    doc.output('dataurlnewwindow')
+     doc.save(`servidor-${servidor.nombre}.pdf`);
+  }
 
 }
