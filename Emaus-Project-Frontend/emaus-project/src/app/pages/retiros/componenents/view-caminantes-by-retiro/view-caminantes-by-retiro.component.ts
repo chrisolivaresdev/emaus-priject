@@ -190,13 +190,21 @@ userActive!:User
 
   async generatePDF(caminante:any) {
     const doc = new jsPDF();
+    if(caminante.img){
+      doc.addImage(`${caminante.img}`, 'PNG', 10, 10, 40, 40);
+      doc.setTextColor(60, 60, 60)
+      doc.setFontSize(18);
+      doc.setFont('helvetica','bold')
+      doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 65, 20);
+      doc.text(`Caminante de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 98, 27);
+    }else{
+      doc.setTextColor(60, 60, 60)
+      doc.setFontSize(18);
+      doc.setFont('helvetica','bold')
+      doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 45, 20);
+      doc.text(`Caminante de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 76, 27);
+    }
 
-    doc.addImage(`${caminante.img}`, 'PNG', 10, 10, 40, 40);
-    doc.setTextColor(60, 60, 60)
-    doc.setFontSize(18);
-    doc.setFont('helvetica','bold')
-    doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 65, 20);
-    doc.text(`Caminante ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 98, 27);
     doc.setFontSize(16);
     doc.text(`Nombres:`, 10, 60);
     doc.text(`${caminante.nombre}`,80, 60);

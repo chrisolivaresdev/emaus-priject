@@ -182,13 +182,24 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
 
   async generatePDF(servidor:any) {
     const doc = new jsPDF();
+    if(servidor.img){
+      doc.addImage(`${servidor.img}`, 'PNG', 10, 10, 40, 40);
+    }
 
-    doc.addImage(`${servidor.img}`, 'PNG', 10, 10, 40, 40);
-    doc.setTextColor(60, 60, 60)
-    doc.setFontSize(18);
-    doc.setFont('helvetica','bold')
-    doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 65, 20);
-    doc.text(`servidor ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 98, 27);
+    if(servidor.img){
+      doc.addImage(`${servidor.img}`, 'PNG', 10, 10, 40, 40);
+      doc.setTextColor(60, 60, 60)
+      doc.setFontSize(18);
+      doc.setFont('helvetica','bold')
+      doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 65, 20);
+      doc.text(`Servidor de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 98, 27);
+    }else{
+      doc.setTextColor(60, 60, 60)
+      doc.setFontSize(18);
+      doc.setFont('helvetica','bold')
+      doc.text(`Planilla de Inscripción de Retiro de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 45, 20);
+      doc.text(`Servidor de ${this.userActive.role.charAt(0).toUpperCase() + this.userActive.role.slice(1).toLowerCase()}`, 76, 27);
+    }
     doc.setFontSize(16);
     doc.text(`Nombres:`, 10, 60);
     doc.text(`${servidor.nombre}`,80, 60);
