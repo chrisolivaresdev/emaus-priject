@@ -29,6 +29,7 @@ router.post('/',
     check('tratamiento','Los tratamientos son obligatorio').not().isEmpty(),
     check('alergia','Saber si es alergico es obligatorio').not().isEmpty(),
     check('aporte_eco','El aporte economico es obligatorio').not().isEmpty(),
+    check('postulante','El postulante es obligatorio').not().isEmpty(),
     check('notas','Tener notas es obligatorio').not().isEmpty(),
     validarCampos
 ]
@@ -50,6 +51,7 @@ router.put('/:id',[
     check('tratamiento','Los tratamientos son obligatorio').not().isEmpty(),
     check('alergia','Saber si es alergico es obligatorio').not().isEmpty(),
     check('aporte_eco','El aporte economico es obligatorio').not().isEmpty(),
+    check('postulante','El postulante es obligatorio').not().isEmpty(),
     check('notas','Tener notas es obligatorio').not().isEmpty(),
     validarCampos
 ], actualizarCaminante);

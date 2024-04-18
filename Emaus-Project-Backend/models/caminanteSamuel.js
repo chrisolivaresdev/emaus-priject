@@ -66,6 +66,10 @@ const CaminanteSamuelSchema = Schema({
         type:String,
         required:true,
     },
+    postulante:{
+        type:String,
+        required:true,
+    },
     retiro:{
         required:true,
         type: Schema.Types.ObjectId,

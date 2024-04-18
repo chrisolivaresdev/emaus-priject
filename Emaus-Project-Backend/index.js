@@ -37,8 +37,7 @@ app.use('/api/servidoresSerafin', require('./routes/servidorSerafin'))
 app.use('/api/retiroSemillita', require('./routes/retiroSemillita'))
 app.use('/api/caminantesSemillita', require('./routes/caminanteSemillita'))
 app.use('/api/servidoresSemillita', require('./routes/servidorSemillita'))
-//imagenes
-app.use('/api/uploads', require('./routes/uploads'))
+
 
 app.listen( process.env.PORT, ()=> {
     console.log('servidor corriendo en el puerto ' + process.env.PORT)
