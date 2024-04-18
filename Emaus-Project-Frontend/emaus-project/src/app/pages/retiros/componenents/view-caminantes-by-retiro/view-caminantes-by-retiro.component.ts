@@ -5,9 +5,9 @@ import Swal from 'sweetalert2';
 import { User } from 'src/app/interface/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 
-// no se esta usando
-import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-view-caminantes-by-retiro',
   templateUrl: './view-caminantes-by-retiro.component.html',
@@ -225,7 +225,7 @@ userActive!:User
     doc.text(`Telefono:`, 10, 180);
     doc.text(`${caminante.telefono}`,80, 180);
     doc.text(`Postulante:`, 10, 195);
-    doc.text(`Juan Perez`,80, 195);
+    doc.text(`${caminante.postulante}`,80, 195);
     doc.text(`Nombre de un familiar:`, 10, 210);
     doc.text(`${caminante.nombre_fam}`,80, 210);
     doc.text(`Teléfono del familiar:`, 10, 225);
@@ -242,5 +242,31 @@ userActive!:User
     doc.autoPrint({variant: 'non-conform'});
     doc.output('dataurlnewwindow')
      doc.save(`caminante-${caminante.nombre}.pdf`);
+  }
+
+
+  Listado() {
+
+    if(this.caminantes < 1){
+      Swal.fire('Espera!', 'No hay caminantes registrados para generar un listado', 'warning')
+      return
+    }
+
+    const doc = new jsPDF('p', 'pt', 'a4');
+
+    // Configurar opciones de la tabla
+    let options = {
+      margin: { top: 50 },
+      startY: 50
+    };
+
+    autoTable(doc, {
+      head: [['Nombre', 'Cedula', 'Fecha de nacimiento', 'Estatura', 'Peso', "Telefono", "Familiar", "Telefono"]], // Cabecera de la tabla
+      body: this.caminantes.map((caminante:any) => [caminante.nombre, caminante.cedula, caminante.fecha_nac, caminante.estatura, caminante.peso,caminante.telefono, caminante.nombre_fam, caminante.telefono_fam]), // Cuerpo de la tabla
+      ...options // Opciones adicionales
+    })
+    doc.autoPrint({variant: 'non-conform'});
+    doc.output('dataurlnewwindow')
+    doc.save('listadoDeCaminantes.pdf');
   }
 }

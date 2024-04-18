@@ -40,6 +40,7 @@ export class AddEditCaminanteComponent implements OnInit {
         alergia: ['', [Validators.required]],
         aporte_eco: ['', [Validators.required]],
         notas: ['', [Validators.required]],
+        postulante: ['', [Validators.required]],
         img:['']
       }
       )
@@ -86,6 +87,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['postulante'].setValue(caminante.postulante);
             this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
@@ -110,6 +112,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['postulante'].setValue(caminante.postulante);
             this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
@@ -134,6 +137,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['postulante'].setValue(caminante.postulante);
             this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
@@ -158,6 +162,7 @@ export class AddEditCaminanteComponent implements OnInit {
             this.formGroup.controls['alergia'].setValue(caminante.alergia);
             this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
             this.formGroup.controls['notas'].setValue(caminante.notas);
+            this.formGroup.controls['postulante'].setValue(caminante.postulante);
             this.formGroup.controls['img'].setValue(caminante.img);
           }
         })
@@ -184,6 +189,7 @@ export class AddEditCaminanteComponent implements OnInit {
         this.formGroup.controls['alergia'].setValue(caminante.alergia);
         this.formGroup.controls['aporte_eco'].setValue(caminante.aporte_eco);
         this.formGroup.controls['notas'].setValue(caminante.notas);
+        this.formGroup.controls['postulante'].setValue(caminante.postulante);
         this.formGroup.controls['img'].setValue(caminante.img);
       }
     })
@@ -260,6 +266,9 @@ export class AddEditCaminanteComponent implements OnInit {
             if(err.error.errors?.notas){
               return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
             }
+            if(err.error.errors?.postulante){
+              return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+            }
            return Swal.fire('Error', err.error.msg, 'warning')
           }
           )
@@ -320,6 +329,9 @@ export class AddEditCaminanteComponent implements OnInit {
             }
             if(err.error.errors?.notas){
               return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
+            }
+            if(err.error.errors?.postulante){
+              return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
             }
            return Swal.fire('Error', err.error.msg, 'warning')
           }
@@ -382,6 +394,9 @@ export class AddEditCaminanteComponent implements OnInit {
             if(err.error.errors?.notas){
               return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
             }
+            if(err.error.errors?.postulante){
+              return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+            }
            return Swal.fire('Error', err.error.msg, 'warning')
           }
           )
@@ -442,6 +457,9 @@ export class AddEditCaminanteComponent implements OnInit {
             }
             if(err.error.errors?.notas){
               return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
+            }
+            if(err.error.errors?.postulante){
+              return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
             }
            return Swal.fire('Error', err.error.msg, 'warning')
           }
@@ -511,6 +529,9 @@ export class AddEditCaminanteComponent implements OnInit {
            if(err.error.errors?.notas){
              return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
            }
+           if(err.error.errors?.postulante){
+            return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+          }
           return Swal.fire('Error', err.error.msg, 'warning')
          }
          )
@@ -572,6 +593,9 @@ export class AddEditCaminanteComponent implements OnInit {
            if(err.error.errors?.notas){
              return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
            }
+           if(err.error.errors?.postulante){
+            return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+          }
           return Swal.fire('Error', err.error.msg, 'warning')
          }
          )
@@ -633,6 +657,9 @@ export class AddEditCaminanteComponent implements OnInit {
            if(err.error.errors?.notas){
              return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
            }
+           if(err.error.errors?.postulante){
+            return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+          }
           return Swal.fire('Error', err.error.msg, 'warning')
          }
          )
@@ -694,6 +721,9 @@ export class AddEditCaminanteComponent implements OnInit {
            if(err.error.errors?.notas){
              return Swal.fire('Error', err.error.errors.notas.msg, 'warning')
            }
+           if(err.error.errors?.postulante){
+            return Swal.fire('Error', err.error.errors.postulante.msg, 'warning')
+          }
           return Swal.fire('Error', err.error.msg, 'warning')
          }
          )

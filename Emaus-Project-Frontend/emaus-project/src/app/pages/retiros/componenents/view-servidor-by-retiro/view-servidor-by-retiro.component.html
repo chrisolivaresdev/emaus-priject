@@ -1,7 +1,10 @@
-<div class="card">
-  <div class="col-2 mb-2">
-    <p-button icon="pi pi-plus" pTooltip="Agregar" tooltipPosition="top" styleClass="p-button-secondary" (click)="add()"></p-button>
+<div class="card animate__animated animate__fadeIn animate__slow" *ngIf="servidores">
+  <div class="col-12 mb-2 flex justify-content-between flex-wrap" style="display:flex; justify-content: space-between; align-items: center;">
+    <div class="col-2 mb-2">
+      <p-button icon="pi pi-plus" pTooltip="Agregar" tooltipPosition="top" styleClass="p-button-secondary" (click)="add()"></p-button>
+    </div>
   </div>
+
   <p-table [value]="servidores">
     <ng-template pTemplate="header">
       <tr>
@@ -15,15 +18,21 @@
         <td class="text-center" *ngFor="let col of cols">
           {{servidor[col.field]}}
           <span class="acciones" *ngIf="col.field == 'Acciones'">
-          <i class="mdi mdi-eye icon-color" pTooltip="Ver" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="ver(servidor)"></i>
+            <i class="mdi mdi-eye icon-color" pTooltip="Ver" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="ver(servidor)"></i>
+            <i class="mdi mdi-download icon-color" pTooltip="Planilla" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="generatePDF(servidor)"></i>
           <i class="mdi mdi-account-edit icon-color" pTooltip="Editar" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="editar(servidor)"></i>
           <i class="mdi mdi-delete icon-color" pTooltip="Eliminar" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="show(servidor)"></i>
-          <i class="mdi mdi-download icon-color" pTooltip="Planilla" tooltipPosition="bottom" style="font-size: 1.2rem" (click)="generatePDF(servidor)"></i>
         </span>
         </td>
     </tr>
     </ng-template>
   </p-table>
+</div>
+
+<div class="col-12 mb-2 flex justify-content-between flex-wrap animate__animated animate__fadeIn animate__slow" style="display:flex; justify-content: space-between; align-items: center;" *ngIf="servidores">
+  <div class="col-2 mb-2">
+      <p-button icon="pi pi-download" pTooltip="Listado" tooltipPosition="top" styleClass="p-button-secondary" (click)="Listado()"></p-button>
+  </div>
 </div>
 
 

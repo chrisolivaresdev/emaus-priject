@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interface/user.interface';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 
 // no se esta usando
 import html2canvas from 'html2canvas';
@@ -219,24 +220,49 @@ constructor( private servidoresService:ServidoresService,private router:Router, 
     doc.text(`${servidor.peso}`,80, 165);
     doc.text(`Telefono:`, 10, 180);
     doc.text(`${servidor.telefono}`,80, 180);
-    doc.text(`Postulante:`, 10, 195);
-    doc.text(`Juan Perez`,80, 195);
-    doc.text(`Nombre de un familiar:`, 10, 210);
-    doc.text(`${servidor.nombre_fam}`,80, 210);
-    doc.text(`Teléfono del familiar:`, 10, 225);
-    doc.text(`${servidor.telefono_fam}`,80, 225);
-    doc.text(`Antecedentes médicos:`, 10, 240);
-    doc.text(`${servidor.antecedentes_med}`,80, 240);
-    doc.text(`Tratamiento médico:`, 10, 255);
-    doc.text(`${servidor.tratamiento}`,80, 255);
-    doc.text(`Alergías:`, 10, 270);
-    doc.text(`${servidor.alergia}`,80, 270);
-    doc.text(`Notas:`, 10, 285);
-    doc.text(`${servidor.notas}`,80, 285);
+    // doc.text(`Postulante:`, 10, 195);
+    // doc.text(`Juan Perez`,80, 195);
+    doc.text(`Nombre de un familiar:`, 10, 195);
+    doc.text(`${servidor.nombre_fam}`,80, 195);
+    doc.text(`Teléfono del familiar:`, 10, 210);
+    doc.text(`${servidor.telefono_fam}`,80, 210);
+    doc.text(`Antecedentes médicos:`, 10, 225);
+    doc.text(`${servidor.antecedentes_med}`,80, 225);
+    doc.text(`Tratamiento médico:`, 10, 240);
+    doc.text(`${servidor.tratamiento}`,80, 240);
+    doc.text(`Alergías:`, 10, 255);
+    doc.text(`${servidor.alergia}`,80, 255);
+    doc.text(`Notas:`, 10, 270);
+    doc.text(`${servidor.notas}`,80, 270);
 
     doc.autoPrint({variant: 'non-conform'});
     doc.output('dataurlnewwindow')
      doc.save(`servidor-${servidor.nombre}.pdf`);
+  }
+
+  Listado() {
+
+    if(this.servidores < 1){
+      Swal.fire('Espera!', 'No hay serfvidores registrados para generar un listado', 'warning')
+      return
+    }
+
+    const doc = new jsPDF('p', 'pt', 'a4');
+
+    // Configurar opciones de la tabla
+    let options = {
+      margin: { top: 50 },
+      startY: 50
+    };
+
+    autoTable(doc, {
+      head: [['Nombre', 'Cedula', 'Fecha de nacimiento', 'Estatura', 'Peso', "Telefono", "Familiar", "Telefono"]], // Cabecera de la tabla
+      body: this.servidores.map((servidor:any) => [servidor.nombre, servidor.cedula, servidor.fecha_nac, servidor.estatura, servidor.peso,servidor.telefono, servidor.nombre_fam, servidor.telefono_fam]), // Cuerpo de la tabla
+      ...options // Opciones adicionales
+    })
+    doc.autoPrint({variant: 'non-conform'});
+    doc.output('dataurlnewwindow')
+    doc.save('listadoDeServidores.pdf');
   }
 
 }

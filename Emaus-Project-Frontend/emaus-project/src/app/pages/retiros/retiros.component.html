@@ -1,7 +1,11 @@
-<div class="card">
-  <div class="col-2 mb-2">
-    <p-button icon="pi pi-plus" pTooltip="Agregar" tooltipPosition="right" styleClass="p-button-secondary" (click)="add()"></p-button>
+<div class="card animate__animated animate__fadeIn animate__slow">
+  <div class="col-12 mb-2 flex justify-content-between flex-wrap" style="display:flex; justify-content: space-between; align-items: center;">
+    <div class="col-2 mb-2">
+      <p-button icon="pi pi-plus" pTooltip="Agregar" tooltipPosition="right" styleClass="p-button-secondary" (click)="add()"></p-button>
+    </div>
   </div>
+
+
 <p-table [value]="retiros">
   <ng-template pTemplate="header">
     <tr>
